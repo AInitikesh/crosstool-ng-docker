@@ -2,7 +2,6 @@ FROM alpine:3.8
 
 MAINTAINER 007nitikeshrock@gmail.com nitikesh 
 
-# add user ctng
 RUN mkdir /home/ctng \
 &&  groupadd -r ctng -g 1000 \
 &&  useradd -u 1000 -r -g ctng -d /home/ctng -s /bin/bash -c "Docker image user" ctng \
