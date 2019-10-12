@@ -5,9 +5,7 @@ MAINTAINER 007nitikeshrock@gmail.com nitikesh
 RUN mkdir /home/ctng \
 &&  addgroup -g 1000 ctng \
 &&  adduser -D -h /home/ctng -G ctng -u 1000 -s /bin/bash ctng \
-&&  chown -R ctng:ctng /home/ctng \
-&&  adduser ctng sudo \
-&&  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+&&  chown -R ctng:ctng /home/ctng 
 
 
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
@@ -28,7 +26,7 @@ RUN git clone https://github.com/crosstool-ng/crosstool-ng.git \
 &&  ./bootstrap \
 &&  ./configure \
 &&  make \
-&&  sudo make install \
+&&  make install \
 &&  rm -rf ../crosstool-ng/ 
 
 ENTRYPOINT [ "/sbin/dumb-init", "--" ]
