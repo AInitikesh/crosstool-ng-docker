@@ -16,17 +16,15 @@ RUN wget -O /sbin/dumb-init https://github.com/Yelp/dumb-init/releases/download/
 RUN chmod a+x /sbin/dumb-init
 RUN echo 'export PATH=/opt/ctng/bin:$PATH' >> /etc/profile
 
-
-
 WORKDIR /home/ctng
-USER ctng
+# USER ctng
 
-RUN git clone https://github.com/crosstool-ng/crosstool-ng.git \
-&&  cd /home/ctng/crosstool-ng \
-&&  ./bootstrap \
-&&  ./configure \
-&&  make \
-&&  make install \
-&&  rm -rf ../crosstool-ng/ 
+RUN git clone https://github.com/crosstool-ng/crosstool-ng.git 
+RUN cd /home/ctng/crosstool-ng \
+    && ./bootstrap \
+    && ./configure \
+    && make \
+    && make install \
+    && rm -rf ../crosstool-ng/
 
 ENTRYPOINT [ "/sbin/dumb-init", "--" ]
