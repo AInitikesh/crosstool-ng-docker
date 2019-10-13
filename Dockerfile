@@ -17,7 +17,6 @@ RUN chmod a+x /sbin/dumb-init
 RUN echo 'export PATH=/opt/ctng/bin:$PATH' >> /etc/profile
 
 WORKDIR /home/ctng
-# USER ctng
 
 RUN git clone https://github.com/crosstool-ng/crosstool-ng.git 
 RUN cd /home/ctng/crosstool-ng \
@@ -26,5 +25,9 @@ RUN cd /home/ctng/crosstool-ng \
     && make \
     && make install \
     && rm -rf ../crosstool-ng/
+
+USER ctng
+RUN ct-ng arm-unknown-linux-gnueabi
+RUN ct-ng build
 
 ENTRYPOINT [ "/sbin/dumb-init", "--" ]
