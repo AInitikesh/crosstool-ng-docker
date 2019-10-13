@@ -19,8 +19,9 @@ RUN wget -O /sbin/dumb-init https://github.com/Yelp/dumb-init/releases/download/
 RUN chmod a+x /sbin/dumb-init
 RUN echo 'export PATH=/opt/ctng/bin:$PATH' >> /etc/profile
 
-USER ctng
+
 WORKDIR /home/ctng
+USER ctng
 
 ENV CT_NG_VERSION=1.24.0
 RUN git clone -b crosstool-ng-${CT_NG_VERSION} --single-branch --depth 1 \
