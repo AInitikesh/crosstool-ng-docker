@@ -27,7 +27,7 @@ RUN cd /home/ctng/crosstool-ng \
     && rm -rf ../crosstool-ng/
 
 USER ctng
-RUN ct-ng arm-unknown-linux-gnueabi
-RUN ct-ng build
+RUN /sbin/dumb-init -- ct-ng arm-unknown-linux-gnueabi
+RUN /sbin/dumb-init -- ct-ng build
 
 ENTRYPOINT [ "/sbin/dumb-init", "--" ]
