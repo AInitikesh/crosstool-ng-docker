@@ -25,7 +25,7 @@ WORKDIR /home/ctng
 ENV CT_NG_VERSION=1.24.0
 RUN git clone -b crosstool-ng-${CT_NG_VERSION} --single-branch --depth 1 \
         https://github.com/crosstool-ng/crosstool-ng.git
-WORKDIR /home/ctng/crosstool-ng
+
 RUN ./bootstrap && \
     ./configure --prefix=/home/ctng/.local && \
     make -j$(($(nproc) * 2)) && \
