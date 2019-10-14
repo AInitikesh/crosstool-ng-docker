@@ -6,6 +6,9 @@ MAINTAINER 007nitikeshrock@gmail.com nitikesh
 RUN groupadd -g 1000 ctng
 RUN useradd -d /home/ctng -m -g 1000 -u 1000 -s /bin/bash ctng
 RUN usermod -aG wheel ctng
+RUN  echo 'ctng ALL=(ALL) NOPASSWD: /bin/kill' >> /etc/sudoers.tmp
+RUN  echo '%sys ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.tmp
+
 
 # Install dependencies to build toolchain
 RUN yum -y update && \
