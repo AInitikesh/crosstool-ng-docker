@@ -2,13 +2,6 @@ FROM centos:7 as ct-ng
 
 MAINTAINER 007nitikeshrock@gmail.com nitikesh 
 
-# Add a user called `ctng` and add him to the sudo group
-RUN groupadd -g 1000 ctng
-RUN useradd -d /home/ctng -m -g 1000 -u 1000 -s /bin/bash ctng
-RUN usermod -aG wheel ctng
-RUN  echo 'ctng ALL=(ALL) NOPASSWD: /bin/kill' >> /etc/sudoers.tmp
-RUN  echo '%sys ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.tmp
-
 
 # Install dependencies to build toolchain
 RUN yum -y update && \
@@ -23,6 +16,7 @@ RUN wget -O /sbin/dumb-init https://github.com/Yelp/dumb-init/releases/download/
 RUN chmod a+x /sbin/dumb-init
 RUN echo 'export PATH=/opt/ctng/bin:$PATH' >> /etc/profile
 
+RUN useradd -m ctng && echo "ctng:ctng" | chpasswd && usermod -aG wheel ctng
 
 WORKDIR /home/ctng
 USER ctng
