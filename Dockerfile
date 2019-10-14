@@ -40,4 +40,6 @@ USER ctng
 RUN /sbin/dumb-init -- ct-ng arm-unknown-linux-gnueabi
 RUN /sbin/dumb-init -- ct-ng build
 
+ENV PATH=/home/ctng/x-tools/arm-unknown-linux-gnueabi/bin:$PATH
+
 ENTRYPOINT [ "/sbin/dumb-init", "--" ]
