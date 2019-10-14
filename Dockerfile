@@ -41,5 +41,7 @@ RUN /sbin/dumb-init -- ct-ng arm-unknown-linux-gnueabi
 RUN /sbin/dumb-init -- ct-ng build
 
 ENV PATH=/home/ctng/x-tools/arm-unknown-linux-gnueabi/bin:$PATH
+RUN useradd ctng sudo \
+    &&  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 ENTRYPOINT [ "/sbin/dumb-init", "--" ]
