@@ -5,7 +5,7 @@ MAINTAINER 007nitikeshrock@gmail.com nitikesh
 # Add a user called `ctng` and add him to the sudo group
 RUN groupadd -g 1000 ctng
 RUN useradd -d /home/ctng -m -g 1000 -u 1000 -s /bin/bash ctng
-
+RUN usermod -aG wheel ctng
 
 # Install dependencies to build toolchain
 RUN yum -y update && \
@@ -41,6 +41,5 @@ RUN /sbin/dumb-init -- ct-ng arm-unknown-linux-gnueabi
 RUN /sbin/dumb-init -- ct-ng build
 
 ENV PATH=/home/ctng/x-tools/arm-unknown-linux-gnueabi/bin:$PATH
-RUN usermod -aG wheel ctng
 
 ENTRYPOINT [ "/sbin/dumb-init", "--" ]
