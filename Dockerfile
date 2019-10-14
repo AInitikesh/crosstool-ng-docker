@@ -9,6 +9,7 @@ RUN yum -y update && \
     yum install -y autoconf gperf bison file flex texinfo help2man gcc-c++ \
     libtool make patch ncurses-devel python36-devel perl-Thread-Queue bzip2 \
     git wget which xz unzip && \
+    yum install sudo && \
     yum clean all
 
 RUN ln -sf python36 /usr/bin/python3
