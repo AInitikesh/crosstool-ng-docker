@@ -3,10 +3,6 @@ FROM centos:7 as ct-ng
 MAINTAINER 007nitikeshrock@gmail.com nitikesh 
 
 
-RUN groupadd -g 1000 ctng
-RUN useradd -d /home/ctng -m -g 1000 -u 1000 -s /bin/bash ctng
-RUN usermod -aG wheel ctng
-
 # Install dependencies to build toolchain
 RUN yum -y update && \
     yum install -y epel-release && \
