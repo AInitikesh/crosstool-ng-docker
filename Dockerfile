@@ -3,13 +3,17 @@ FROM centos:7 as ct-ng
 MAINTAINER 007nitikeshrock@gmail.com nitikesh 
 
 
+RUN groupadd -g 1000 ctng
+RUN useradd -d /home/ctng -m -g 1000 -u 1000 -s /bin/bash ctng
+RUN usermod -aG wheel ctng
+
 # Install dependencies to build toolchain
 RUN yum -y update && \
     yum install -y epel-release && \
     yum install -y autoconf gperf bison file flex texinfo help2man gcc-c++ \
     libtool make patch ncurses-devel python36-devel perl-Thread-Queue bzip2 \
     git wget which xz unzip && \
-    yum install sudo && \
+    yum install -y sudo && \
     yum clean all
 
 RUN ln -sf python36 /usr/bin/python3
