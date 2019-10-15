@@ -9,7 +9,7 @@ RUN yum -y update && \
     yum install -y autoconf gperf bison file flex texinfo help2man gcc-c++ \
     libtool make patch ncurses-devel python36-devel perl-Thread-Queue bzip2 \
     git wget which xz unzip && \
-    yum install -y sudo && \
+    yum install -y sudo dtc bc && \
     yum clean all
 
 RUN ln -sf python36 /usr/bin/python3
@@ -18,6 +18,8 @@ RUN chmod a+x /sbin/dumb-init
 RUN echo 'export PATH=/opt/ctng/bin:$PATH' >> /etc/profile
 
 RUN useradd -m ctng && echo "ctng:ctng" | chpasswd && usermod -aG wheel ctng
+
+ENV PATH=/home/ctng/x-tools/arm-unknown-linux-gnueabi/bin:$PATH
 
 WORKDIR /home/ctng
 USER ctng
